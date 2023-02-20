@@ -93,7 +93,7 @@ function getComputerChoice(): Choice {
     return choices[Math.floor(Math.random() * choices.length)]
 }
 
-function playGame(n) {
+function playGame(numberOfRounds) {
     function go(game: Game, n: number) {
         if (n == 0) {
             alert(getDeclarationOfGame(game))
@@ -105,7 +105,7 @@ function playGame(n) {
         }
     }
 
-    go(Array(), n)
+    go(Array(), numberOfRounds)
 }
 
 playGame(5)
