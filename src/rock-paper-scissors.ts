@@ -100,7 +100,6 @@ function playGame(n) {
         } else {
             const playerChoice = getChoice()
             const computerChoice = getComputerChoice()
-            console.log(playerChoice, computerChoice, getOutcomeOfRound(playerChoice, computerChoice))
             alert(getDeclarationOfRound(playerChoice, computerChoice))
             go(game.concat(getOutcomeOfRound(playerChoice, computerChoice)), n - 1)
         }
