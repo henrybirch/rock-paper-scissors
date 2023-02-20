@@ -1,17 +1,7 @@
 enum Outcome {
-    Win, Draw, Lose
+    Win = "Win", Draw = "Draw", Lose = "Lose"
 }
 
 enum Choice {
-    Paper, Rock, Scissors
+    Paper = "Paper", Rock = "Rock", Scissors = "Scissors"
 }
-
-function choiceCompare(playerChoice: Choice, computerChoice: Choice) {
-    if (playerChoice === computerChoice)
-        return Outcome.Draw
-    else if (playerChoice.valueOf() - computerChoice.valueOf() == -1) {
-        return Outcome.Win
-    } else return Outcome.Lose
-}
-
-
