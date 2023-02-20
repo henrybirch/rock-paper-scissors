@@ -61,3 +61,29 @@ function getComputerChoice(): Choice {
     const choices = [Choice.Rock, Choice.Paper, Choice.Scissors]
     return choices[Math.floor(Math.random() * choices.length)]
 }
+
+console.log(JSON.stringify([Outcome.Draw, Outcome.Draw, Outcome.Win]))
+console.log(getOutcomeOfGame([Outcome.Draw, Outcome.Win]))
+
+function startGame(choice: Choice) {
+}
+
+function updateGame(choice: Choice) {
+
+}
+
+function endGame() {
+}
+
+function playRound(choice: Choice) {
+    if (localStorage.getItem("game") == null) {
+        startGame(choice)
+        return
+    }
+    updateGame(choice)
+
+    const currentGame: Game = JSON.parse(localStorage.getItem("game"))
+    if (currentGame.length == 5) {
+        endGame()
+    }
+}
