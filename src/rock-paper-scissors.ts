@@ -70,6 +70,8 @@ function setStats(stats: Stats) {
 }
 
 function startGame(choice: Choice) {
+    setStats({wins: 0, draws: 0, losses: 0})
+    updateGame(choice)
 }
 
 function updateGame(choice: Choice) {
