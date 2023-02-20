@@ -6,7 +6,7 @@ enum Choice {
     Rock = "Rock", Paper = "Paper", Scissors = "Scissors"
 }
 
-function getValueOfChoice(choice: Choice) {
+function getValueOfChoice(choice: Choice): number {
     switch (choice) {
         case Choice.Paper:
             return 1
