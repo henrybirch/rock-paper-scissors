@@ -1,5 +1,5 @@
 enum Outcome {
-    Win = 1, Draw = 0, Lose = -1
+    Win = "Win", Draw = "Draw", Lose = "Lose"
 }
 
 enum Choice {
