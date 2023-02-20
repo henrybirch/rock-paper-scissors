@@ -17,6 +17,17 @@ function getValueOfChoice(choice: Choice): number {
     }
 }
 
+function getValueOfOutcome(outcome: Outcome): number {
+    switch (outcome) {
+        case Outcome.Win:
+            return 1
+        case Outcome.Draw:
+            return 0
+        case Outcome.Lose:
+            return -1
+    }
+}
+
 function getOutcomeOfRound(playerChoice: Choice, computerChoice: Choice) {
     if (playerChoice == computerChoice) return Outcome.Draw
     if ((getValueOfChoice(playerChoice) - getValueOfChoice(computerChoice)) == -1) return Outcome.Win
