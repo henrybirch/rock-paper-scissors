@@ -9,11 +9,11 @@ enum Choice {
 function getValueOfChoice(choice: Choice) {
     switch (choice) {
         case Choice.Paper:
-            return 0
-        case Choice.Rock:
             return 1
-        case Choice.Scissors:
+        case Choice.Rock:
             return 2
+        case Choice.Scissors:
+            return 3
     }
 }
 
@@ -100,6 +100,7 @@ function playGame(n) {
         } else {
             const playerChoice = getChoice()
             const computerChoice = getComputerChoice()
+            console.log(playerChoice, computerChoice, getOutcomeOfRound(playerChoice, computerChoice))
             alert(getDeclarationOfRound(playerChoice, computerChoice))
             go(game.concat(getOutcomeOfRound(playerChoice, computerChoice)), n - 1)
         }
