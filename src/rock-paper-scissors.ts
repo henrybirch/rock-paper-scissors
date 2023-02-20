@@ -89,7 +89,7 @@ function stringToChoice(s: String): Choice {
 
 function getChoice(): Choice {
     const choice = prompt("Enter rock, paper or scissors: ")
-    return stringToChoice(choice)
+    return stringToChoice(choice.trim().toLowerCase())
 }
 
 function getComputerChoice(): Choice {
