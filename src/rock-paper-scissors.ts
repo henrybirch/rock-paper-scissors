@@ -65,6 +65,10 @@ function getComputerChoice(): Choice {
 console.log(JSON.stringify([Outcome.Draw, Outcome.Draw, Outcome.Win]))
 console.log(getOutcomeOfGame([Outcome.Draw, Outcome.Win]))
 
+function setStats(stats: Stats) {
+    localStorage.setItem("stats", JSON.stringify(stats))
+}
+
 function startGame(choice: Choice) {
 }
 
