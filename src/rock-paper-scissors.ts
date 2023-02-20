@@ -44,9 +44,9 @@ function getOutcomeOfGame(game: Game) {
 }
 
 type Stats = {
-    wins: Number
-    losses: Number
-    draws: Number
+    wins: number
+    losses: number
+    draws: number
 }
 
 function getStats(game: Game): Stats {
