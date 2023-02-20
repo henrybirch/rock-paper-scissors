@@ -37,9 +37,9 @@ function getOutcomeOfRound(playerChoice: Choice, computerChoice: Choice) {
 type Game = Outcome[]
 
 function getOutcomeOfGame(game: Game) {
-    const sum = game.reduce((previousValue, currentValue) => previousValue + currentValue.valueOf())
-    if (sum > 0) return Outcome.Win
-    if (sum < 0) return Outcome.Lose
+    const gameValue = game.map(getValueOfOutcome).reduce((previousValue, currentValue) => previousValue + currentValue)
+    if (gameValue > 0) return Outcome.Win
+    if (gameValue < 0) return Outcome.Lose
     return Outcome.Draw
 }
 
