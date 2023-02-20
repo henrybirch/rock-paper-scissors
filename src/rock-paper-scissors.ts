@@ -74,6 +74,14 @@ function startGame(choice: Choice) {
     updateGame(choice)
 }
 
+function getStatsForGame(): Stats {
+    return JSON.parse(localStorage.getItem("stats"))
+}
+
+function getGame(): Game {
+    return JSON.parse(localStorage.getItem("game"))
+}
+
 function updateGame(choice: Choice) {
 
 }
