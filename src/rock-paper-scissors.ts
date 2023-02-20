@@ -74,9 +74,8 @@ function getDeclarationOfGame(game: Game): String {
     }
 }
 
-function getChoice(): Choice {
-    const choice = prompt("Enter rock, paper or scissors: ")
-    switch (choice.trim().toLowerCase()) {
+function stringToChoice(s: String): Choice {
+    switch (s) {
         case "rock":
             return Choice.Rock
         case "paper":
@@ -84,8 +83,13 @@ function getChoice(): Choice {
         case "scissors":
             return Choice.Scissors
         default:
-            throw new Error("Not a choice!")
+            throw new Error("Not a choice")
     }
+}
+
+function getChoice(): Choice {
+    const choice = prompt("Enter rock, paper or scissors: ")
+    return stringToChoice(choice)
 }
 
 function getComputerChoice(): Choice {
