@@ -5,3 +5,16 @@
     gap: 25%;
     margin-top: 2.5%;
 }
+
+.stats-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.stat-container {
+    margin: 5% 0 5% 0;
+}
