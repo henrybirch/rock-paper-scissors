@@ -113,6 +113,12 @@ function endGame() {
     description.textContent = `Wins: ${stats.wins}\nDraws: ${stats.draws}\nLosses: ${stats.losses}`
 }
 
+function togglePopup() {
+    document.getElementById("popup").classList.toggle("active")
+    setStatsInUi()
+}
+
+
 function playRound(choice: Choice) {
     if (localStorage.getItem("game") == null) {
         startGame(choice)
