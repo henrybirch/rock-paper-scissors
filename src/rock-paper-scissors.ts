@@ -74,6 +74,7 @@ function setGame(game: Game) {
 }
 
 function startGame() {
+    setGame([])
     setStats({wins: 0, draws: 0, losses: 0})
 }
 
