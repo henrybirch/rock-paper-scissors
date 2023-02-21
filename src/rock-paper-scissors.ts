@@ -62,8 +62,6 @@ function getComputerChoice(): Choice {
     return choices[Math.floor(Math.random() * choices.length)]
 }
 
-console.log(JSON.stringify([Outcome.Draw, Outcome.Draw, Outcome.Win]))
-console.log(getOutcomeOfGame([Outcome.Draw, Outcome.Win]))
 
 function setStats(stats: Stats) {
     localStorage.setItem("stats", JSON.stringify(stats))
