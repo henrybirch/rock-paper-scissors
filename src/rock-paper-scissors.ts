@@ -87,7 +87,11 @@ function getGame(): Game {
 }
 
 function updateGame(choice: Choice) {
+    const computerChoice = getComputerChoice()
+    const outcome = getOutcomeOfRound(choice, computerChoice)
 
+    const game = getGame()
+    setGame(game.concat(outcome))
 }
 
 function endGame() {
