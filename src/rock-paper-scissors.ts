@@ -97,6 +97,20 @@ function updateGame(choice: Choice) {
 }
 
 function endGame() {
+    const title = document.getElementById("popup-title")
+
+    const outcome = getOutcomeOfGame(getGame())
+    if (outcome == Outcome.Win) {
+        title.textContent = "Win!"
+    } else if (outcome == Outcome.Draw) {
+        title.textContent = "Draw!"
+    } else {
+        title.textContent = "Loss!"
+    }
+
+    const description = document.getElementById("popup-text")
+    const stats = getStatsForGame()
+    description.textContent = `Wins: ${stats.wins}\nDraws: ${stats.draws}\nLosses: ${stats.losses}`
 }
 
 function playRound(choice: Choice) {
