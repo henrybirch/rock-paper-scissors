@@ -28,7 +28,7 @@ body {
 
 .stats-section {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: flex-start;
     flex-direction: column;
     margin-top: 5%;
