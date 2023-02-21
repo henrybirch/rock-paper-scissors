@@ -108,3 +108,14 @@ function playRound(choice: Choice) {
         endGame()
     }
 }
+
+function setStatsInUi() {
+    const wins = document.querySelector(".wins.number")
+    const draws = document.querySelector(".draws.number")
+    const losses = document.querySelector(".losses.number")
+
+    const stats = getStatsForGame()
+    wins.textContent = stats.wins.toString()
+    draws.textContent = stats.draws.toString()
+    losses.textContent = stats.losses.toString()
+}
