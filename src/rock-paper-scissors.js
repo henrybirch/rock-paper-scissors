@@ -56,8 +56,6 @@ function getComputerChoice() {
     const choices = [Choice.Rock, Choice.Paper, Choice.Scissors];
     return choices[Math.floor(Math.random() * choices.length)];
 }
-console.log(JSON.stringify([Outcome.Draw, Outcome.Draw, Outcome.Win]));
-console.log(getOutcomeOfGame([Outcome.Draw, Outcome.Win]));
 function setStats(stats) {
     localStorage.setItem("stats", JSON.stringify(stats));
 }
