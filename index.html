@@ -3,10 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="src/rock-paper-scissors.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<script src="src/rock-paper-scissors.js">
-</script>
-
+<div class="button-section">
+    <div class="rock-button choice">Rock</div>
+    <div class="paper-button choice">Paper</div>
+    <div class="scissors-button choice">Scissors</div>
+</div>
+<div class="stats-section">
+    <div class="wins stat-container">
+        <div class="wins stat-text">Wins</div>
+        <div class="wins stat-number"></div>
+    </div>
+    <div class="draws stat-container">
+        <div class="draws stat-text">Draws</div>
+        <div class="draws stat-number"></div>
+    </div>
+    <div class="losses stat-container">
+        <div class="losses stat-text">Losses</div>
+        <div class="losses stat-number"></div>
+    </div>
+</div>
+<div class="popup" id="popup">
+    <div id="overlay"></div>
+    <div class="content">
+        <button class="close-btn" onclick="togglePopup()">&times;</button>
+        <h3 id="popup-title"></h3>
+        <h4 id="popup-text"></h4>
+    </div>
+</div>
 </body>
 </html>

@@ -1,12 +1,12 @@
 enum Outcome {
-    Win = 1, Draw = 0, Lose = -1
+    Win = "Win", Draw = "Draw", Lose = "Lose"
 }
 
 enum Choice {
     Rock = "Rock", Paper = "Paper", Scissors = "Scissors"
 }
 
-function getValueOfChoice(choice: Choice) {
+function getValueOfChoice(choice: Choice): number {
     switch (choice) {
         case Choice.Paper:
             return 1
@@ -17,36 +17,36 @@ function getValueOfChoice(choice: Choice) {
     }
 }
 
+function getValueOfOutcome(outcome: Outcome): number {
+    switch (outcome) {
+        case Outcome.Win:
+            return 1
+        case Outcome.Draw:
+            return 0
+        case Outcome.Lose:
+            return -1
+    }
+}
+
 function getOutcomeOfRound(playerChoice: Choice, computerChoice: Choice) {
     if (playerChoice == computerChoice) return Outcome.Draw
     if ((getValueOfChoice(playerChoice) - getValueOfChoice(computerChoice)) == -1) return Outcome.Win
     return Outcome.Lose
 }
 
-function getDeclarationOfRound(playerChoice: Choice, computerChoice: Choice) {
-    switch (getOutcomeOfRound(playerChoice, computerChoice)) {
-        case Outcome.Draw:
-            return "You draw!" + " You both chose " + playerChoice.toString().toLowerCase() + "!"
-        case Outcome.Win:
-            return "You win! " + playerChoice.toString() + " beats " + computerChoice.toString().toLowerCase() + "!"
-        case Outcome.Lose:
-            return "You lose! " + playerChoice.toString() + " loses to " + computerChoice.toString().toLowerCase() + "!"
-    }
-}
-
 type Game = Outcome[]
 
 function getOutcomeOfGame(game: Game) {
-    const sum = game.reduce((previousValue, currentValue) => previousValue + currentValue.valueOf())
-    if (sum > 0) return Outcome.Win
-    if (sum < 0) return Outcome.Lose
+    const gameValue = game.map(getValueOfOutcome).reduce((previousValue, currentValue) => previousValue + currentValue)
+    if (gameValue > 0) return Outcome.Win
+    if (gameValue < 0) return Outcome.Lose
     return Outcome.Draw
 }
 
 type Stats = {
-    wins: Number
-    losses: Number
-    draws: Number
+    wins: number
+    losses: number
+    draws: number
 }
 
 function getStats(game: Game): Stats {
@@ -57,59 +57,99 @@ function getStats(game: Game): Stats {
     }
 }
 
-function statsToString(stats: Stats): String {
-    return "Wins: " + stats.wins + "\n" + "Losses: " + stats.wins + "\n" + "Draws: " + stats.draws
-}
-
-function getDeclarationOfGame(game: Game): String {
-    const outcome = getOutcomeOfGame(game)
-    const stats = getStats(game)
-    switch (outcome) {
-        case Outcome.Draw:
-            return "The game is a draw!" + "\n" + statsToString(stats)
-        case Outcome.Win:
-            return "You won the game!" + "\n" + statsToString(stats)
-        case Outcome.Lose:
-            return "You lost the game!" + "\n" + statsToString(stats)
-    }
-}
-
-function stringToChoice(s: String): Choice {
-    switch (s) {
-        case "rock":
-            return Choice.Rock
-        case "paper":
-            return Choice.Paper
-        case "scissors":
-            return Choice.Scissors
-        default:
-            throw new Error("Not a choice")
-    }
-}
-
-function getChoice(): Choice {
-    const choice = prompt("Enter rock, paper or scissors: ")
-    return stringToChoice(choice.trim().toLowerCase())
-}
-
 function getComputerChoice(): Choice {
     const choices = [Choice.Rock, Choice.Paper, Choice.Scissors]
     return choices[Math.floor(Math.random() * choices.length)]
 }
 
-function playGame(numberOfRounds) {
-    function go(game: Game, n: number) {
-        if (n == 0) {
-            alert(getDeclarationOfGame(game))
-        } else {
-            const playerChoice = getChoice()
-            const computerChoice = getComputerChoice()
-            alert(getDeclarationOfRound(playerChoice, computerChoice))
-            go(game.concat(getOutcomeOfRound(playerChoice, computerChoice)), n - 1)
-        }
-    }
+console.log(JSON.stringify([Outcome.Draw, Outcome.Draw, Outcome.Win]))
+console.log(getOutcomeOfGame([Outcome.Draw, Outcome.Win]))
 
-    go(Array(), numberOfRounds)
+function setStats(stats: Stats) {
+    localStorage.setItem("stats", JSON.stringify(stats))
 }
 
-playGame(5)
+function setGame(game: Game) {
+    localStorage.setItem("game", JSON.stringify(game))
+}
+
+function startGame() {
+    setGame([])
+    setStats({wins: 0, draws: 0, losses: 0})
+}
+
+function getStatsForGame(): Stats {
+    return JSON.parse(localStorage.getItem("stats"))
+}
+
+function getGame(): Game {
+    return JSON.parse(localStorage.getItem("game"))
+}
+
+function updateGame(choice: Choice) {
+    const computerChoice = getComputerChoice()
+    const outcome = getOutcomeOfRound(choice, computerChoice)
+
+    const game = getGame().concat(outcome)
+    setGame(game)
+    setStats(getStats(game))
+    setStatsInUi()
+}
+
+function endGame() {
+    const title = document.getElementById("popup-title")
+
+    const outcome = getOutcomeOfGame(getGame())
+    if (outcome == Outcome.Win) {
+        title.textContent = "Win!"
+    } else if (outcome == Outcome.Draw) {
+        title.textContent = "Draw!"
+    } else {
+        title.textContent = "Loss!"
+    }
+
+    const description = document.getElementById("popup-text")
+    const stats = getStatsForGame()
+    description.textContent = `Wins: ${stats.wins}\nDraws: ${stats.draws}\nLosses: ${stats.losses}`
+}
+
+function togglePopup() {
+    document.getElementById("popup").classList.toggle("active")
+    setStatsInUi()
+}
+
+
+function playRound(choice: Choice) {
+    updateGame(choice)
+
+    if (getGame().length == 5) {
+        endGame()
+        togglePopup()
+        startGame()
+    }
+}
+
+function setStatsInUi() {
+    const wins = document.querySelector(".wins.stat-number")
+    const draws = document.querySelector(".draws.stat-number")
+    const losses = document.querySelector(".losses.stat-number")
+
+    const stats = getStatsForGame()
+    wins.textContent = stats.wins.toString()
+    draws.textContent = stats.draws.toString()
+    losses.textContent = stats.losses.toString()
+}
+
+function setEventListenersForChoices() {
+    const rock = document.querySelector(".rock-button")
+    const paper = document.querySelector(".paper-button")
+    const scissors = document.querySelector(".scissors-button")
+
+    rock.addEventListener("click", (e) => playRound(Choice.Rock))
+    paper.addEventListener("click", (e) => playRound(Choice.Paper))
+    scissors.addEventListener("click", (e) => playRound(Choice.Scissors))
+}
+
+startGame()
+setStatsInUi()
+setEventListenersForChoices()
