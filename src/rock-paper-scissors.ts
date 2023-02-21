@@ -122,3 +122,17 @@ function setStatsInUi() {
     draws.textContent = stats.draws.toString()
     losses.textContent = stats.losses.toString()
 }
+
+function setEventListenersForChoices() {
+    const rock = document.querySelector(".rock-button")
+    const paper = document.querySelector(".paper-button")
+    const scissors = document.querySelector(".scissors-button")
+
+    rock.addEventListener("click", (e) => playRound(Choice.Rock))
+    paper.addEventListener("click", (e) => playRound(Choice.Paper))
+    scissors.addEventListener("click", (e) => playRound(Choice.Scissors))
+}
+
+startGame()
+setStatsInUi()
+setEventListenersForChoices()
