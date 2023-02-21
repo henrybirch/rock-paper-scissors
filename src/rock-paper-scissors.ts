@@ -69,6 +69,10 @@ function setStats(stats: Stats) {
     localStorage.setItem("stats", JSON.stringify(stats))
 }
 
+function setGame(game: Game) {
+    localStorage.setItem("game", JSON.stringify(game))
+}
+
 function startGame(choice: Choice) {
     setStats({wins: 0, draws: 0, losses: 0})
     updateGame(choice)
