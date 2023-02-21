@@ -122,9 +122,10 @@ function togglePopup() {
 function playRound(choice: Choice) {
     updateGame(choice)
 
-    const currentGame: Game = JSON.parse(localStorage.getItem("game"))
-    if (currentGame.length == 5) {
+    if (getGame().length == 5) {
         endGame()
+        togglePopup()
+        startGame()
     }
 }
 
